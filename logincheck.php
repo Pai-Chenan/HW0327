@@ -1,18 +1,22 @@
-<?
+<?php
+session_start();
+$fID = "user";
+$fPWD = "0502";
 
-$fID="derrick";
-$fPWD="12345678";
-if(isset($_POST["uID"]) && sset($_POST["uPWD"])){
+if(isset($_POST["uID"]) && isset($_POST["uPWD"])){
+    $uID = $_POST["uID"];
+    $uPWD = $_POST["uPWD"];
 
-$uID=$_POST["uID"];
-$uPWD=$_POST["uPWD"];
-
-if($fID==$uID&&$fPWD==$uPWD){
-    echo "成功";
-}else{
-    echo "失敗"
+    if($fID == $uID && $fPWD == $uPWD){
+        $_SESSION["login_status"] = "success";
+        header("Location: form.php");
+        exit(); 
+    } else {
+        header("Location: login.php?error=1");
+        exit();
+    }
+} else {
+    header("Location: login.php");
+    exit();
 }
-
-}
-
 ?>
